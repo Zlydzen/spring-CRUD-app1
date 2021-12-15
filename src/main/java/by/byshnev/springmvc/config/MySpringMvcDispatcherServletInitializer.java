@@ -1,4 +1,4 @@
-package by.byshnev.springmvc;
+package by.byshnev.springmvc.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
