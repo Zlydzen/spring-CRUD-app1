@@ -1,5 +1,6 @@
 package by.byshnev.springmvc.controllers;
 
+import by.byshnev.springmvc.dao.PersonDAO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,6 @@ public class PeopleController {
     @GetMapping
     public String index(Model model){
         // получим всех людей из DAO и передадим на отображение в VIEW
-
         return null;
     }
 
