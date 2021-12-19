@@ -19,28 +19,26 @@ public class PeopleController {
     }
 
     @GetMapping
-    public String index(Model model){
+    public String index(Model model) {
         // получим всех людей из DAO и передадим на отображение в VIEW
         model.addAttribute("people", personDAO.index());
         return "people/index";
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model){
+    public String show(@PathVariable("id") int id, Model model) {
         // получим одного человека по id из DAO и передадим на отображение в VEW
-        model.addAttribute("person",personDAO.show(id));
+        model.addAttribute("person", personDAO.show(id));
         return "people/show";
     }
 
     @GetMapping("/new")
-    public String newPerson(Model model){
-        model.addAttribute("person", new Person());
-
+    public String newPerson(@ModelAttribute("person") Person person) {
         return "people/new";
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("person") Person person){
+    public String create(@ModelAttribute("person") Person person) {
         personDAO.save(person);
         return "redirect:/people";
     }
