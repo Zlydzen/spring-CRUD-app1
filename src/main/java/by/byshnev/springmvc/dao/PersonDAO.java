@@ -38,8 +38,8 @@ public class PersonDAO {
         personToBeUpdated.setName(updatePerson.getName());
     }
 
-    public void delete(Person person) {
-        people.remove(person);
+    public void delete(int i) {
+        people.removeIf(person -> person.getId() == i);
     }
 
 }
