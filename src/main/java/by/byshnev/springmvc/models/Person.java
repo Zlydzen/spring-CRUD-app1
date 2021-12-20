@@ -1,13 +1,24 @@
 package by.byshnev.springmvc.models;
 
+import jakarta.validation.constraints.*;
+
 public class Person {
 
     private int id;
+
+    @NotEmpty(message = "Name should not be empty")
+    @Size(min = 2, max = 30, message = "Name is too long")
     private String name;
+
+    @Min(value = 0, message = "Age should be greater than 0")
     private int age;
+
+    @NotEmpty(message = "email should not be empty")
+    @Email(message = "incorrect email")
     private String email;
 
-    public Person(){}
+    public Person() {
+    }
 
     public Person(int id, String name, int age, String email) {
         this.id = id;
