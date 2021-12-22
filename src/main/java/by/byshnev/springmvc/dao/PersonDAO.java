@@ -36,7 +36,7 @@ public class PersonDAO {
 
         try {
             Statement statement = connection.createStatement();
-            String SQL = "SELECT * FROM Person";    //не обязательно
+            String SQL = "SELECT * FROM Person";
             ResultSet resultSet = statement.executeQuery(SQL);
 
             while (resultSet.next()) {
@@ -61,24 +61,36 @@ public class PersonDAO {
         return people;
     }
 
-//    public Person show(int id) {
+    public Person show(int id) {
 //        return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
-//    }
-
-    public void save(Person person) {
-        person.setId(++PEOPLE_COUNT);
-        people.add(person);
+        return null;
     }
 
-//    public void update(int i, Person updatePerson) {
+    public void save(Person person) {
+//        person.setId(++PEOPLE_COUNT);
+//        people.add(person);
+
+        try {
+            Statement statement = connection.createStatement();
+            String SQL = "INSERT INTO Person VALUES(" + 1 + ",'" + person.getName() +
+                    "'," + person.getAge() + ",'" + person.getEmail() + "')";
+            statement.executeUpdate(SQL);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+    }
+
+    public void update(int i, Person updatePerson) {
 //        Person personToBeUpdated = show(i);
 //        personToBeUpdated.setName(updatePerson.getName());
 //        personToBeUpdated.setAge(updatePerson.getAge());
 //        personToBeUpdated.setEmail(updatePerson.getEmail());
-//    }
+    }
 
     public void delete(int i) {
-        people.removeIf(person -> person.getId() == i);
+//        people.removeIf(person -> person.getId() == i);
     }
 
 }
