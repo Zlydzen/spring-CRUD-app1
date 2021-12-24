@@ -110,6 +110,7 @@ public class PersonDAO {
             preparedStatement.setString(3, updatePerson.getEmail());
             preparedStatement.setInt(4,id); //так как у нас id 1 для всех person, то БД перезапишет всех person значениями
 
+            preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -117,7 +118,6 @@ public class PersonDAO {
     }
 
     public void delete(int i) {
-//        people.removeIf(person -> person.getId() == i);
     }
 
 }
