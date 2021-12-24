@@ -100,11 +100,20 @@ public class PersonDAO {
         }
     }
 
-    public void update(int i, Person updatePerson) {
-//        Person personToBeUpdated = show(i);
-//        personToBeUpdated.setName(updatePerson.getName());
-//        personToBeUpdated.setAge(updatePerson.getAge());
-//        personToBeUpdated.setEmail(updatePerson.getEmail());
+    public void update(int id, Person updatePerson) {
+
+        try {
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("UPDATE Peson SET name=?,age=?,email=? WHERE id=?");
+            preparedStatement.setString(1, updatePerson.getName());
+            preparedStatement.setInt(2,updatePerson.getAge());
+            preparedStatement.setString(3, updatePerson.getEmail());
+            preparedStatement.setInt(4,id); //так как у нас id 1 для всех person, то БД перезапишет всех person значениями
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 
     public void delete(int i) {
