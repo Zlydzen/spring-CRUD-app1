@@ -72,8 +72,8 @@ public class PersonDAO {
 
         try {
             Statement statement = connection.createStatement();
-            String SQL = "INSERT INTO Person VALUES(" + 1 + ",'" + person.getName() +
-                    "'," + person.getAge() + ",'" + person.getEmail() + "')";
+            String SQL = "INSERT INTO Person VALUES(" + 1 + ",'" + person.getName() + "',"
+                    + person.getAge() + ",'" + person.getEmail() + "')";
             statement.executeUpdate(SQL);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
