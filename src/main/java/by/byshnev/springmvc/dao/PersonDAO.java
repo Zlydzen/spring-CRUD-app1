@@ -62,8 +62,27 @@ public class PersonDAO {
     }
 
     public Person show(int id) {
-//        return people.stream().filter(person -> person.getId() == id).findAny().orElse(null);
-        return null;
+        Person person = null; // такое объявление обходит стэк блока try, для того чтобы вернуть person
+
+        try {
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement("SELECT * FROM Person WHERE id=?");
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            resultSet.next(); //из-за того, что у нас все люди имеют id 1, то эта строка нам вернет первого
+                              //встретившегося из БД с id 1;
+
+            person = new Person();
+            person.setId(resultSet.getInt("id"));
+            person.setName(resultSet.getString("name"));
+            person.setAge(resultSet.getInt("age"));
+            person.setEmail(resultSet.getString("email"));
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return person;
     }
 
     public void save(Person person) {
