@@ -31,48 +31,16 @@ public class PersonDAO {
     }
 
     public void save(Person person) {
-
-        try {
-            PreparedStatement preparedStatement =
-                    connection.prepareStatement("INSERT INTO Person VALUES(1,?,?,?)");
-            preparedStatement.setString(1, person.getName());
-            preparedStatement.setInt(2,person.getAge());
-            preparedStatement.setString(3, person.getEmail());
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
+        jdbcTemplate.update("INSERT INTO person VALUES (1,?,?,?)", person.getName(), person.getAge(),
+                person.getEmail());
     }
 
     public void update(int id, Person updatePerson) {
-
-        try {
-            PreparedStatement preparedStatement =
-                    connection.prepareStatement("UPDATE Peson SET name=?,age=?,email=? WHERE id=?");
-            preparedStatement.setString(1, updatePerson.getName());
-            preparedStatement.setInt(2,updatePerson.getAge());
-            preparedStatement.setString(3, updatePerson.getEmail());
-            preparedStatement.setInt(4,id); //так как у нас id 1 для всех person, то БД перезапишет всех person значениями
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
+        jdbcTemplate.update("UPDATE person SET name=?, age=?, email=? WHERE  id=?", updatePerson.getName(),
+                updatePerson.getAge(), updatePerson.getEmail(), id);
     }
 
     public void delete(int id) {
-
-        try {
-            PreparedStatement preparedStatement =
-                    connection.prepareStatement("DELETE FROM Person WHERE id=?");
-            preparedStatement.setInt(1,id);
-            preparedStatement.executeUpdate();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
+        jdbcTemplate.update("DELETE FROM person WHERE id=?", id);
     }
-
 }
